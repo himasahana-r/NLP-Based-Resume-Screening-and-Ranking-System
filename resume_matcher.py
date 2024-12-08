@@ -481,7 +481,7 @@ def load_job_dataset(dataset_path):
         return None
 
 # Streamlit Interface
-st.title("Resume Matcher with Skills Extraction and Job Dataset Integration")
+st.title("Resume Matcher Version 1.0")
 st.subheader("Upload your resumes and job description to find the best match!")
 
 # Load dataset
