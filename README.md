@@ -51,7 +51,7 @@ A **Streamlit** application that matches resumes to job descriptions using **SBE
 
 4. Run the application:
     ```bash
-    streamlit run app.py
+    streamlit run resume_matcher.py
     ```
 
 ---
