@@ -55,7 +55,6 @@ A **Streamlit** application that matches resumes to job descriptions using **SBE
     ```
 5. Download the .gz files, extract them and place the dataset files in the main directory as the resume_matcher.py.
 
-6. Replace the path in the code with the path of the downloaded dataset file.
 ---
 
 ## Usage
