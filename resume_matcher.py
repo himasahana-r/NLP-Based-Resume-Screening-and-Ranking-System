@@ -485,7 +485,7 @@ st.title("Resume Matcher with Skills Extraction and Job Dataset Integration")
 st.subheader("Upload your resumes and job description to find the best match!")
 
 # Load dataset
-dataset_path = "H:/Documents/UWM/Fall 2024/Resume Matcher/jobs_dataset.csv"  # Replace with the actual path to the uploaded dataset
+dataset_path = "placeholder path"  # Replace with the actual path to the uploaded dataset
 job_dataset = load_job_dataset(dataset_path)
 
 if job_dataset is not None:
