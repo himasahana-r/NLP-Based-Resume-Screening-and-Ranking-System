@@ -490,35 +490,30 @@ try:
     job_dataset = load_job_dataset(dataset_path)
     if job_dataset is not None:
         st.write("Job Titles Dataset Loaded Successfully!")
-        job_title = st.selectbox("Select a Job Title:", job_dataset["jobtitle"].unique())
+        
+        # Display job title dropdown
+        job_title = st.selectbox("Select a Job Title:", job_dataset["jobtitle"].unique(), key="job_title_selectbox")
 
-        # Preload the job description from the dataset
+        # Preload the job description into the text box
         if job_title:
             selected_job_description = job_dataset[job_dataset["jobtitle"] == job_title]["jobdescription"].iloc[0]
-            st.text_area("Preloaded Job Description:", value=selected_job_description, key="job_description")
+            # Display job description only in the text box
+            st.session_state["job_description"] = st.text_area(
+                "Preloaded Job Description:", value=selected_job_description, key="job_description_textarea"
+            )
     else:
         st.error("Failed to load Job Titles Dataset. Please check the file format.")
 except Exception as e:
     st.error(f"Error loading Jobs Dataset: {e}")
 
-
-if job_dataset is not None:
-    st.write("Job Titles Dataset Loaded Successfully!")
-    job_title = st.selectbox("Select a Job Title:", job_dataset["jobtitle"].unique())
-
-    # Preload the job description from the dataset
-    if job_title:
-        selected_job_description = job_dataset[job_dataset["jobtitle"] == job_title]["jobdescription"].iloc[0]
-        st.text_area("Preloaded Job Description:", value=selected_job_description, key="job_description")
-else:
-    st.error("Failed to load job titles dataset. Please check the file format.")
-    
-# Resume Upload
 # Resume Upload
 resume_files = st.file_uploader("Upload Resumes (PDFs):", type=["pdf"], accept_multiple_files=True)
 
 if st.button("Match Resumes"):
-    if st.session_state.get("job_description") and resume_files:
+    # Debugging outputs (optional)
+    st.write(f"Uploaded Resumes: {[file.name for file in resume_files] if resume_files else 'None'}")
+
+    if "job_description" in st.session_state and resume_files:
         # Preprocess Job Description and Resumes
         job_description = st.session_state["job_description"]
         preprocessed_job_desc = preprocess(job_description)
@@ -560,10 +555,16 @@ if st.button("Match Resumes"):
         else:
             st.error("SBERT model is not available. Please ensure it is loaded correctly.")
     else:
-        st.error("Please provide both a job description and resumes!")
+        # Enhanced error messages
+        if "job_description" not in st.session_state:
+            st.error("Job description is missing. Please select a job title or provide a job description.")
+        if not resume_files:
+            st.error("No resumes uploaded. Please upload one or more resumes!")
 
 
-        
+
+
+#Functionality for Evaluation Metrics        
 import pandas as pd
 import streamlit as st
 from sklearn.metrics import precision_score, recall_score, f1_score, precision_recall_curve
