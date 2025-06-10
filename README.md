@@ -1,4 +1,4 @@
-# Resume Matcher with Explainable AI
+# NLP-Based Resume Screening and Ranking System with Explainable AI
 
 A **Streamlit** application that matches resumes to job descriptions using **SBERT** embeddings and **Bag-of-Words (BoW)** similarity techniques. The app integrates **Explainable AI (XAI)** features to provide insights into the matching process, including matched and missing skills for resumes.
 
